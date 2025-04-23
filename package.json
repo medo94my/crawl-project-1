@@ -1,0 +1,21 @@
+{
+  "name": "project-1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build:css": "npx tailwindcss -i ./static/css/input.css -o ./static/css/styles.css",
+    "watch:css": "npx tailwindcss -i ./static/css/input.css -o ./static/css/styles.css --watch",
+    "dev": "concurrently \"npm run watch:css\" \"flask run\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "concurrently": "^9.1.2",
+    "daisyui": "^5.0.27",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^3.4.17"
+  }
+}

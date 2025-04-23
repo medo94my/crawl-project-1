@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html data-theme="dark">
+
+<head>
+    <title>SEO Analysis</title>
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.min.js"></script>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/styles.css')}}">
+</head>
+
+<body class="bg-base-200 p-4 md:p-8">
+    <header>
+        <nav class="bg-gray-200 dark:bg-gray-800 p-4 rounded-md mb-4">
+            <h1 class="text-lg text-white">SEO Analysis</h1>
+        </nav>
+    </header>
+    <div id="loading-state"> <span class="loading loading-spinner loading-lg text-primary"></span>
+        <span class="ml-4 text-lg font-semibold text-primary">Loading Analysis...</span>
+    </div>
+    <div id="error-container"></div>
+    <main class="p-5 vh-full " id="main-contnent">
+        <div class="flex justify-center align-center">
+            {% include 'form.html'%}
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+            {% include 'seo_suggestions.html'%}
+            {% include 'seo_report.html'%}
+        </div>
+
+
+    </main>
+
+    <script src="{{url_for('static',filename='js/app.js')}}"></script>
+    <script src="{{url_for('static',filename='js/seo_report.js')}}"></script>
+</body>
+
+</html>

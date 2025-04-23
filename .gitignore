@@ -1,0 +1,69 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+.venv/
+env/
+venv/
+ENV/
+*.egg
+*.pth
+.cache
+develop-eggs/
+dist/
+build/
+parts/
+eggs/
+lib/
+lib64/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.whl
+*.egg-info/
+.installed.cfg
+*.manifest
+
+# Log files and databases
+*.log
+*.sql
+*.sqlite
+*.db
+
+# Flask specific
+instance/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# IDE and editor files
+.idea/
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+
+# Distribution / packaging
+.DS_Store
+*.exe
+*.pyc
+*.tar
+*.zip
+*.gz
+
+# Testing
+.pytest_cache/
+htmlcov/
+.coverage
+
+# Other
+tmp/
+temp/
+.env
+crawl4ai_env
+node_modules/
+.vscode

@@ -1,0 +1,95 @@
+{% raw %}
+<div>
+    <div class="max-w-4xl mx-auto bg-neutral text-neutral-content rounded-lg shadow-lg p-6 md:p-8 mb-4">
+        <h1 class="text-2xl font-bold text-center">SEO Analysis & Enhancement Suggestions</h1>
+    </div>
+    <div id="seo-content" class="max-w-4xl mx-auto card bg-neutral text-neutral-content rounded-lg shadow-lg p-6 md:p-8"
+        style="display: none;">
+        <section id="title-analysis-section" class="mb-8"></section>
+        <section id="meta-description-analysis-section" class="mb-8"></section>
+        <section id="h1-tag-analysis-section" class="mb-8"></section>
+        <section id="content-analysis-section" class="mb-8"></section>
+        <section id="link-analysis-section" class="mb-8"></section>
+        <section id="keyword-optimization-section" class="mb-8"></section>
+        <section id="other-suggestions-section" class="mb-8"></section>
+    </div>
+
+    <script id="section-template" type="text/x-handlebars-template">
+<h2 class="text-xl font-semibold">{{title}} :</h2>
+{{#if Analysis}}
+    <div class="text-md">{{Analysis}}</div>
+{{else}}
+    <p class="text-gray-500 mb-4">No analysis provided for this section.</p>
+{{/if}}
+
+<h3 class="text-2xl font-medium">Suggestions:</h3>
+{{#if Suggestions}}
+    {{#each Suggestions}}
+    <div class="card bg-neutral text-neutral-content">
+        <p class="mb-2">{{this.Suggestion}}</p>
+        {{#if this.Title}} {{#unless (eq this.Title "N/A")}}<p class="text-sm text-gray-600"><strong>Proposed Title:</strong> {{this.Title}}</p>{{/unless}} {{/if}}
+        {{#if this.Meta_Description}} {{#unless (eq this.Meta_Description "N/A")}}<p class="text-sm text-gray-600"><strong>Proposed Meta Desc:</strong> {{this.Meta_Description}}</p>{{/unless}} {{/if}}
+        {{#if this.H1_Tag}} {{#unless (eq this.H1_Tag "N/A")}}<p class="text-sm text-gray-600"><strong>Proposed H1:</strong> {{this.H1_Tag}}</p>{{/unless}} {{/if}}
+        {{#if this.Keyword}} {{#unless (eq this.Keyword "N/A")}}<p class="text-sm text-gray-600"><strong>Keyword:</strong> {{this.Keyword}}</p>{{/unless}} {{/if}}
+        {{#if this.Reason}}<p class="text-sm text-gray-600"><strong>Reason:</strong> {{this.Reason}}</p>{{/if}}
+        {{#if this.Insertion}} {{#unless (eq this.Insertion "N/A")}}<p class="text-sm text-gray-600"><strong>Insertion Point:</strong> {{this.Insertion}}</p>{{/unless}} {{/if}}
+        {{#if this.Frequency}}<p class="text-sm text-gray-600"><strong>Frequency:</strong> {{this.Frequency}}</p>{{/if}}
+    </div>
+    {{/each}}
+{{else}}
+    <p class="no-suggestions">No specific suggestions provided.</p>
+{{/if}}
+</script>
+
+    <script id="suggestions-only-template" type="text/x-handlebars-template">
+<h2 class="section-title">{{title}}</h2>
+{{#if Suggestions}}
+     {{#each Suggestions}}
+    <div class="suggestion-card">
+        <p class="mb-2">{{this.Suggestion}}</p>
+        {{#if this.Keyword}} {{#unless (eq this.Keyword "N/A")}}<p class="text-sm text-gray-600"><strong>Keyword:</strong> {{this.Keyword}}</p>{{/unless}} {{/if}}
+        {{#if this.Reason}}<p class="text-sm text-gray-600"><strong>Reason:</strong> {{this.Reason}}</p>{{/if}}
+        {{#if this.Insertion}} {{#unless (eq this.Insertion "N/A")}}<p class="text-sm text-gray-600"><strong>Insertion Point:</strong> {{this.Insertion}}</p>{{/unless}} {{/if}}
+        {{#if this.Frequency}}<p class="text-sm text-gray-600"><strong>Frequency:</strong> {{this.Frequency}}</p>{{/if}}
+    </div>
+    {{/each}}
+{{else}}
+    <p class="no-suggestions">No specific suggestions provided.</p>
+{{/if}}
+</script>
+
+    <script id="other-suggestions-template" type="text/x-handlebars-template">
+<h2 class="text-xl font-semibold">{{title}}</h2>
+{{#if OverallAssessment}}
+    <div class="text-md"><strong>Overall Assessment:</strong> {{OverallAssessment}}</div>
+{{/if}}
+{{#if SchemaMarkup}}
+    <div class="text-md font-mono underline"><strong>Schema Markup:</strong> {{SchemaMarkup}}</div>
+{{/if}}
+{{#if MobileOptimization}}
+    <div class="text-md font-mono underline"><strong>Mobile Optimization:</strong> {{MobileOptimization}}</div>
+{{/if}}
+{{#if PageSpeed}}
+     <div class="text-md font-mono underline"><strong>Page Speed:</strong> {{PageSpeed}}</div>
+{{/if}}
+</script>
+
+    <script id="error-template" type="text/x-handlebars-template">
+<div class="hero min-h-screen bg-base-200">
+  <div class="hero-content text-center flex flex-col ">
+    <div class="max-w-md">
+         <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-16 w-16 mx-auto text-error mb-4" fill="none" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+         </svg>
+      <h1 class="text-5xl font-bold text-error">{{errorTitle}}</h1>
+      <p class="py-6 text-base-content/80">{{errorMessage}}</p>
+      {{#if errorCode}}
+        <p class="text-sm text-base-content/60">Error Code: {{errorCode}}</p>
+      {{/if}}
+      </div>
+      <progress id="error-progress" class="progress w-100" value="100" max="100"></progress>
+  </div>
+</div>
+</script>
+</div>
+{% endraw %}

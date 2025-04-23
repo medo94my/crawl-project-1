@@ -1,0 +1,125 @@
+{% raw%}
+<div>
+    <div class="max-w-4xl mx-auto bg-neutral text-neutral-content rounded-lg shadow-lg p-6 md:p-8 mb-4">
+        <h1 class="text-2xl font-bold text-center">Website Crawl Report</h1>
+    </div>
+    <div id="main-content" class="max-w-6xl mx-auto" style="display: none;">
+
+        <div id="stats-section" class="stats-enhanced bg-neutral text-neutral-content">
+        </div>
+
+        <div id="metadata-section" class=" card report-card bg-neutral text-neutral-content">
+            <h2 class="card-title">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-6 h-6 inline-block mr-2 align-text-bottom size-10">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+                </svg>
+                Metadata
+            </h2>
+            <div class="card-body">
+                <dl id="metadata-list" class="metadata-list">
+                </dl>
+            </div>
+        </div>
+
+        <div id="internal-links-section" class="report-card bg-neutral text-neutral-content">
+            <h2 class="card-title">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-6 h-6 inline-block mr-2 align-text-bottom size-10">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.175l-4.5-4.5a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 106.364 6.364l1.757-1.757" />
+                </svg>
+                Internal Links (<span id="internal-link-count-display">0</span>)
+            </h2>
+            <div class="card-body overflow-x-auto table-container">
+                <table class="table table-zebra w-full link-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Text</th>
+                            <th>URL (href)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="internal-links-tbody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="external-links-section" class="report-card bg-neutral text-neutral-content">
+            <h2 class="card-title">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-6 h-6 inline-block mr-2 align-text-bottom">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                </svg>
+                External Links (<span id="external-link-count-display">0</span>)
+            </h2>
+            <div class="card-body overflow-x-auto table-container">
+                <table class="table table-zebra w-full link-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Text</th>
+                            <th>URL (href)</th>
+                            <th>Base Domain</th>
+                        </tr>
+                    </thead>
+                    <tbody id="external-links-tbody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script id="stats-template" type="text/x-handlebars-template">
+        {{#each stats}}
+            <div class="stat-card">
+                <div class="stat-icon {{this.iconClass}} size-10 cover-3 ">{{{this.iconSvg}}}</div>
+                <div class="stat-content">
+                    <div class="stat-title">{{this.title}}</div>
+                    <div class="stat-value {{this.valueClass}}">{{{this.value}}}</div>
+                    {{#if this.description}}
+                        <div class="stat-desc {{this.descClass}}">{{this.description}}</div>
+                    {{/if}}
+                </div>
+            </div>
+        {{/each}}
+    </script>
+
+    <script id="metadata-template" type="text/x-handlebars-template">
+        {{#each metadataItems}}
+            <dt title="{{this.key}}">{{this.key}}</dt>
+            <dd>{{this.value}}</dd>
+        {{else}}
+            <p class="text-base-content/70 p-4">No relevant metadata found.</p>
+        {{/each}}
+    </script>
+
+    <script id="internal-links-template" type="text/x-handlebars-template">
+        {{#each links}}
+            <tr>
+                <th class="text-base-content/50">{{inc @index}}</th>
+                <td>{{{linkText this.text}}}</td>
+                <td><a href="{{this.href}}" target="_blank" rel="noopener noreferrer" title="{{this.href}}">{{this.href}}</a></td>
+            </tr>
+        {{else}}
+            <tr><td colspan="3" class="text-center text-base-content/70 py-4">No internal links found.</td></tr>
+        {{/each}}
+    </script>
+
+    <script id="external-links-template" type="text/x-handlebars-template">
+        {{#each links}}
+            <tr>
+                <th class="text-base-content/50">{{inc @index}}</th>
+                <td>{{{linkText this.text}}}</td>
+                <td><a href="{{this.href}}" target="_blank" rel="noopener noreferrer" title="{{this.href}}">{{this.href}}{{{externalIcon this.href}}}</a></td>
+                <td>{{{domainText this.base_domain}}}</td>
+            </tr>
+        {{else}}
+            <tr><td colspan="4" class="text-center text-base-content/70 py-4">No external links found.</td></tr>
+        {{/each}}
+    </script>
+</div>
+{% endraw %}
